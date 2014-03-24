@@ -5,24 +5,24 @@
         { label: 'MR' },
         { label: 'MS' },
         { label: 'MC' },
-        { label: 'Clear', classname: 'dw-calculator-clear dw-calculator-clearfix', action: 'clear' },
+        { label: 'Clear', classname: 'ss-calculator-clear ss-calculator-clearfix', action: 'clear' },
         { label: 'CE', action: 'clearEntry' },
-        { label: '*', classname: 'dw-calculator-multiply', action: 'operator' },
-        { label: 7, classname: 'dw-calculator-clearfix', action: 'number' },
+        { label: '*', classname: 'ss-calculator-multiply', action: 'operator' },
+        { label: 7, classname: 'ss-calculator-clearfix', action: 'number' },
         { label: 8, action: 'number' },
         { label: 9, action: 'number' },
-        { label: '+', classname: 'dw-calculator-plus', action: 'operator' },
-        { label: 4, classname: 'dw-calculator-clearfix', action: 'number' },
+        { label: '+', classname: 'ss-calculator-plus', action: 'operator' },
+        { label: 4, classname: 'ss-calculator-clearfix', action: 'number' },
         { label: 5, action: 'number' },
         { label: 6, action: 'number' },
-        { label: '-', classname: 'dw-calculator-minus', action: 'operator' },
-        { label: 1, classname: 'dw-calculator-clearfix', action: 'number' },
+        { label: '-', classname: 'ss-calculator-minus', action: 'operator' },
+        { label: 1, classname: 'ss-calculator-clearfix', action: 'number' },
         { label: 2, action: 'number' },
         { label: 3, action: 'number' },
-        { label: '/', classname: 'dw-calculator-divide', action: 'operator' },
-        { label: 0, classname: 'dw-calculator-clearfix dw-calculator-wide', action: 'number' },
-        { label: '.', classname: 'dw-calculator-dot', action: 'dot' },
-        { label: '=', classname: 'dw-calculator-equals', action: 'equals' }
+        { label: '/', classname: 'ss-calculator-divide', action: 'operator' },
+        { label: 0, classname: 'ss-calculator-clearfix ss-calculator-wide', action: 'number' },
+        { label: '.', classname: 'ss-calculator-dot', action: 'dot' },
+        { label: '=', classname: 'ss-calculator-equals', action: 'equals' }
     ];
 
     // Defines the widget
@@ -82,6 +82,7 @@
                         var fName = 'custom.ss.' + i; 
                         widget['_' + fName] = button.action;
                         button.data('action', fName);
+                    }
                 }
             });
 
