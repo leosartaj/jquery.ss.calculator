@@ -25,48 +25,78 @@
         { label: '=', classname: 'dw-calculator-equals', action: 'equals' }
     ];
 
-// Defines the widget
-$.widget('ss.calculator', {
+    // Defines the widget
+    $.widget('ss.calculator', {
 
-    version: '0.0.1',
+        version: '0.0.1',
 
-    // Calls at the time of creation
-    _create : function() {
-        this.element.addClass('ss-calculator');
-        this._createWrapper();
-        this._createButtons();
-        this._renderMarkup();
-    },
+        // configurable options
+        options: {
+            buttons: buttons,
+            show: false,
+            hide: false,
+            showOnCreate: true
+        },
 
-    // Creates the wrapper
-    _createWrapper: function() {
-        var el = $('<div/>'), display;
-        this.shell = el.clone().addClass('ss-calculator-shell');
-        display = el.clone().addClass('ss-calculator-display').appendTo(this.shell);
-        el.clone().addClass('ss-calculator-calculation').appendTo(display);
-        el.clone().addClass('ss-calculator-result').appendTo(display);
-    },
+        // Calls at the time of creation
+        _create : function() {
+            this.element.addClass('ss-calculator');
+            this._createWrapper();
+            this._createButtons();
+            this._renderMarkup();
+        },
 
-    // loads the buttons
-    _createButtons: function() {
-        var el = $('<button/>'), container = $('<div/>').addClass('ui-helper-clearfix'), widget = this, i;
-
-        // iterates on the buttons array
-        $.each(buttons, function(i, button) {
-            var btn = el.clone().text(button.label).appendTo(container).button();
-            if(!!button.classname) {
-                btn.addClass(button.classname);
+        // Creates the wrapper
+        _createWrapper: function() {
+            var el = $('<div/>'), display;
+            this.shell = el.clone().addClass('ss-calculator-shell');
+            display = el.clone().addClass('ss-calculator-display').appendTo(this.shell);
+            el.clone().addClass('ss-calculator-calculation').appendTo(display);
+            el.clone().addClass('ss-calculator-result').appendTo(display);
+            if(!this.options.showOnCreate) {
+                this._hide(this.element, this.options.hide)
             }
-        });
+        },
 
-        // updates shell
-        container.appendTo(this.shell);
-    },
+        // loads the buttons
+        _createButtons: function() {
+            var el = $('<button/>'), container = $('<div/>').addClass('ui-helper-clearfix'), widget = this, i;
 
-    // Joins everything together
-    _renderMarkup: function() {
-        this.shell.appendTo(this.element);
-    }
+            // iterates on the buttons array
+            $.each(this.options.buttons, function(i, button) {
+                var btn = el.clone().text(button.label).appendTo(container).button();
+                if(!!button.classname) {
+                    btn.addClass(button.classname);
+                }
+            });
 
-});
+            // updates shell
+            container.appendTo(this.shell);
+        },
+
+        // Joins everything together
+        _renderMarkup: function() {
+            this.shell.appendTo(this.element);
+        },
+
+        _setOptions: function(options) {
+            this._superApply(arguments);
+        },
+
+        _setOption: function(key, val) {
+            this._super(key, val);
+
+            if(key === 'buttons') {
+                this.shell.find('button').remove();
+                this._createButtons;
+                this._renderMarkup;
+            }
+            else if(key === 'disable') {
+                this.shell.find('button').button('option', key, val);
+            }
+        }
+
+
+    });
+
 }(jQuery));
