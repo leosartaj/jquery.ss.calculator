@@ -78,6 +78,10 @@
                     if(typeof button.action === 'string') {
                         btn.data('action', button.action);
                     }
+                    else if(typeof button.action === 'function') {
+                        var fName = 'custom.ss.' + i; 
+                        widget['_' + fName] = button.action;
+                        button.data('action', fName);
                 }
             });
 
