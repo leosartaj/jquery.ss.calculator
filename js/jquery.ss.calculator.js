@@ -64,9 +64,11 @@
 
             // iterates on the buttons array
             $.each(this.options.buttons, function(i, button) {
-                var btn = el.clone().text(button.label).appendTo(container).button();
-                if(!!button.classname) {
-                    btn.addClass(button.classname);
+                if(widget._trigger('beforeAddButtons', null, button)) {
+                    var btn = el.clone().text(button.label).appendTo(container).button();
+                    if(!!button.classname) {
+                        btn.addClass(button.classname);
+                    }
                 }
             });
 
@@ -94,8 +96,11 @@
             else if(key === 'disable') {
                 this.shell.find('button').button('option', key, val);
             }
-        }
+        }, 
 
+        show: function() {
+            this._show(this.element, this.options.show);
+        }
 
     });
 
