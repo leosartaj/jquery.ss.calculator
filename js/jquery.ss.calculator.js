@@ -44,6 +44,10 @@
             this._createWrapper();
             this._createButtons();
             this._renderMarkup();
+
+            this._on({
+                'click button': this._clickHandler
+            });
         },
 
         // Creates the wrapper
@@ -66,8 +70,13 @@
             $.each(this.options.buttons, function(i, button) {
                 if(widget._trigger('beforeAddButtons', null, button)) {
                     var btn = el.clone().text(button.label).appendTo(container).button();
+
                     if(!!button.classname) {
                         btn.addClass(button.classname);
+                    }
+
+                    if(typeof button.action === 'string') {
+                        btn.data('action', button.action);
                     }
                 }
             });
@@ -100,7 +109,37 @@
 
         show: function() {
             this._show(this.element, this.options.show);
-        }
+        },
+
+        _clickHandler: function(e) {
+            var btn = $(e.target).closest('button'), fn = btn.data('action');
+
+            this['_' + fn](e, btn);
+        },
+
+        _clear: function(e, ui) {
+            console.log('clear');
+        }, 
+
+        _clearEntry: function(e, ui) {
+            console.log('clearEntry');
+        }, 
+
+        _equals: function(e, ui) {
+            console.log('equals');
+        }, 
+
+        _operator: function(e, ui) {
+            console.log('operator');
+        }, 
+
+        _number: function(e, ui) {
+            console.log('number');
+        }, 
+
+        _dot: function(e, ui) {
+            console.log('dot');
+        } 
 
     });
 
