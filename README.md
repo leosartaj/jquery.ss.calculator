@@ -1,0 +1,3 @@
+# README
+
+Simple Calculator plugin
