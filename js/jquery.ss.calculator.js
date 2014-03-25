@@ -2,9 +2,6 @@
 
     // Contains all the buttons
     var buttons = [
-        { label: 'MR' },
-        { label: 'MS' },
-        { label: 'MC' },
         { label: 'Clear', classname: 'ss-calculator-clear ss-calculator-clearfix', action: 'clear' },
         { label: 'CE', action: 'clearEntry' },
         { label: '*', classname: 'ss-calculator-multiply', action: 'operator' },
@@ -40,7 +37,7 @@
 
         // Calls at the time of creation
         _create : function() {
-            this.element.addClass('ss-calculator');
+            this.element.addClass('ss-calculator ui-widget ui-corner-all');
             this._createWrapper();
             this._createButtons();
             this._renderMarkup();
@@ -57,8 +54,8 @@
         // Creates the wrapper
         _createWrapper: function() {
             var el = $('<div/>'), display;
-            this.shell = el.clone().addClass('ss-calculator-shell');
-            display = el.clone().addClass('ss-calculator-display').appendTo(this.shell);
+            this.shell = el.clone().addClass('ss-calculator-shell ui-widget-header ui-corner-all');
+            display = el.clone().addClass('ss-calculator-display ui-widget-content ui-corner-all').appendTo(this.shell);
             el.clone().addClass('ss-calculator-calculation').appendTo(display);
             el.clone().text('0').addClass('ss-calculator-result').appendTo(display);
             if(!this.options.showOnCreate) {
@@ -68,7 +65,7 @@
 
         // loads the buttons
         _createButtons: function() {
-            var el = $('<button/>'), container = $('<div/>').addClass('ui-helper-clearfix'), widget = this, i;
+            var el = $('<button/>'), container = $('<div/>').addClass('ui-helper-clearfix ui-widget-content ui-corner-all'), widget = this, i;
 
             // iterates on the buttons array
             $.each(this.options.buttons, function(i, button) {
@@ -85,7 +82,7 @@
                     else if(typeof button.action === 'function') {
                         var fName = 'custom.ss.' + i; 
                         widget['_' + fName] = button.action;
-                        button.data('action', fName);
+                        btn.data('action', fName);
                     }
                 }
             });

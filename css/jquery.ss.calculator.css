@@ -1,4 +1,8 @@
 
+.ss-calculator .ui-button-disabled {
+    opacity: 1; 
+}
+
 .ss-calculator button {
     float: left; 
 }
@@ -26,4 +30,25 @@
 .ui-button.ss-calculator-dot span {
     padding: .4em 1.1em; 
 }
+
+.ss-calculator {
+    width:12.3em; padding:.2em; 
+}
+
+.ss-calculator-shell {
+    padding: .2em; 
+}
+
+.ss-calculator-display {
+    padding:1.25em .2em .2em; margin-bottom:.2em; overflow:hidden; position:relative; 
+}
+
+.ss-calculator-calculation {
+    width: 1000%; position: absolute; top: .2em; right: .2em; font-size: .6em; text-align: right; 
+}
+
+.ss-calculator-result {
+    font-size:.7em; text-align:right; 
+}
+
 
