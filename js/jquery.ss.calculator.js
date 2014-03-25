@@ -162,6 +162,7 @@
 
             this._display();
             this.numericalInput = false;
+            this._calculate();
         }, 
 
         _number: function(e, ui) {
@@ -193,18 +194,54 @@
             }
         },
 
-        _updateDisplay: function() {
+        _updateDisplay: function(reset) {
             if(!this.currentDisplay.length) {
                 this.element.find('.ss-calculator-result').text('0');
             }
             else if(this.currentDisplay.length < 18) {
                 this.element.find('.ss-calculator-result').text(this.currentDisplay.join(''));
             }
+
+            if(reset) {
+                this.currentDisplay = [];
+            }
         },
 
         _display: function() {
             this.element.find('.ss-calculator-calculation').text(this.display.join(''));
             this.currentDisplay = [];
+        },
+
+        _calculate: function() {
+            var ops = {
+                '+': function(x, y) { return x + y; },
+                '-': function(x, y) { return x - y; },
+                '*': function(x, y) { return x * y; },
+                '/': function(x, y) { return x / y; }
+            };
+
+            function seqCalc(str) {
+                var arr = str.split(' '), left = +arr[0], x, length = arr.length;
+
+                for(x = 1; x < length; x = x + 2) {
+
+                    left = ops[arr[x]](left, +arr[x + 1]);
+
+                }
+
+                return left;
+            }
+
+            if(this.display.length > 1) {
+
+                var tmp = this.display.pop(), trimmed = tmp.replace(/\s[\+\-\/\*]\s/, '');
+
+                this.display.push(trimmed);
+                this.currentDisplay.push(seqCalc(this.display.join('')));
+                this.display.pop();
+                this.display.push(tmp);
+                this._updateDisplay(true);
+            }
         }
 
 
