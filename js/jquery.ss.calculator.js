@@ -135,11 +135,12 @@
         }, 
 
         _clearEntry: function(e, ui) {
-            console.log('clearEntry');
+            this.currentDisplay = [];
+            this._updateDisplay();
         }, 
 
         _equals: function(e, ui) {
-            console.log('equals');
+            this._calculate(true);
         }, 
 
         _operator: function(e, ui) {
@@ -212,7 +213,7 @@
             this.currentDisplay = [];
         },
 
-        _calculate: function() {
+        _calculate: function(final) {
             var ops = {
                 '+': function(x, y) { return x + y; },
                 '-': function(x, y) { return x - y; },
@@ -232,7 +233,17 @@
                 return left;
             }
 
-            if(this.display.length > 1) {
+            if(final) {
+
+                var display = this.element.find('.ss-calculator-calculation').text(), current = this.element.find('.ss-calculator-result').text();
+
+                this.currentDisplay = [seqCalc([display, current].join(''))];
+                this._updateDisplay();
+                this.display = [];
+                this._display();
+                this.numericalInput = false;
+            }
+            else if(this.display.length > 1) {
 
                 var tmp = this.display.pop(), trimmed = tmp.replace(/\s[\+\-\/\*]\s/, '');
 
