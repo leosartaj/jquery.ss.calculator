@@ -48,6 +48,10 @@
             this._on({
                 'click button': this._clickHandler
             });
+
+            this.currentDisplay = [];
+            this.display = [];
+            this.numericalInput = false;
         },
 
         // Creates the wrapper
@@ -55,7 +59,7 @@
             var el = $('<div/>'), display;
             this.shell = el.clone().addClass('ss-calculator-shell');
             display = el.clone().addClass('ss-calculator-display').appendTo(this.shell);
-            el.clone().addClass('ss-calculator-calculation').appendTo(display);
+            el.clone().text('0').addClass('ss-calculator-calculation').appendTo(display);
             el.clone().addClass('ss-calculator-result').appendTo(display);
             if(!this.options.showOnCreate) {
                 this._hide(this.element, this.options.hide)
@@ -139,12 +143,42 @@
         }, 
 
         _number: function(e, ui) {
-            console.log('number');
+            this.currentDisplay.push(ui.text());
+            this._updateDisplay();
+            this.numericalInput = true;
         }, 
 
         _dot: function(e, ui) {
-            console.log('dot');
-        } 
+            var dot = false, x = this.currentDisplay.length;
+
+            if(!x) {
+                this.currentDisplay.push('0');
+            }
+
+            while( --x) {
+                if(this.currentDisplay[x] === '.') {
+                    dot = true;
+                    break;
+                }
+            }
+
+            if(dot) {
+                return false;
+            }
+            else {
+                this.currentDisplay.push('.');
+                this._updateDisplay();
+            }
+        },
+
+        _updateDisplay: function() {
+            if(this.currentDisplay.length < 18) {
+                this.element.find('.ss-calculator-calculation').text(this.currentDisplay.join(''));
+            }
+        }
+
+
+
 
     });
 

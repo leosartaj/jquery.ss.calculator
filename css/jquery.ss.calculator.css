@@ -1,10 +1,10 @@
 
 .ss-calculator button {
-    float: left;
+    float: left; 
 }
 
-.ss-calculator-cleafix {
-    clear: left;
+.ss-calculator-clearfix {
+    clear: left; 
 }
 
 .ui-button.ss-calculator-clear span {
@@ -26,3 +26,4 @@
 .ui-button.ss-calculator-dot span {
     padding: .4em 1.1em; 
 }
+
