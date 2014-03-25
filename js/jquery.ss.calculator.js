@@ -59,8 +59,8 @@
             var el = $('<div/>'), display;
             this.shell = el.clone().addClass('ss-calculator-shell');
             display = el.clone().addClass('ss-calculator-display').appendTo(this.shell);
-            el.clone().text('0').addClass('ss-calculator-calculation').appendTo(display);
-            el.clone().addClass('ss-calculator-result').appendTo(display);
+            el.clone().addClass('ss-calculator-calculation').appendTo(display);
+            el.clone().text('0').addClass('ss-calculator-result').appendTo(display);
             if(!this.options.showOnCreate) {
                 this._hide(this.element, this.options.hide)
             }
@@ -127,7 +127,11 @@
         },
 
         _clear: function(e, ui) {
-            console.log('clear');
+            this.currentDisplay = [];
+            this.display = [];
+            this._updateDisplay();
+            this._display();
+            this.numericalInput = false;
         }, 
 
         _clearEntry: function(e, ui) {
@@ -139,7 +143,25 @@
         }, 
 
         _operator: function(e, ui) {
-            console.log('operator');
+
+            if(!this.display.length && !this.currentDisplay.length) {
+                this.currentDisplay.push(this.element.find('.ss-calculator-result').text());
+            }
+            else if(this.currentDisplay.slice(0).reverse()[0] === '.') {
+                this.currentDisplay.pop();
+            }
+
+            if(!this.display.length || this.numericalInput) {
+                this.display.push([this.currentDisplay.join(''), ' ', ui.text(), ' '].join(''))
+            }
+            else if(!this.numericalInput) {
+                var length = this.display.length, str = this.display[length - 1].replace(/[\*\/\+\-]/, ui.text());
+                this.display.pop();
+                this.display.push(str);
+            }
+
+            this._display();
+            this.numericalInput = false;
         }, 
 
         _number: function(e, ui) {
@@ -172,9 +194,17 @@
         },
 
         _updateDisplay: function() {
-            if(this.currentDisplay.length < 18) {
-                this.element.find('.ss-calculator-calculation').text(this.currentDisplay.join(''));
+            if(!this.currentDisplay.length) {
+                this.element.find('.ss-calculator-result').text('0');
             }
+            else if(this.currentDisplay.length < 18) {
+                this.element.find('.ss-calculator-result').text(this.currentDisplay.join(''));
+            }
+        },
+
+        _display: function() {
+            this.element.find('.ss-calculator-calculation').text(this.display.join(''));
+            this.currentDisplay = [];
         }
 
 
