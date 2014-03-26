@@ -25,6 +25,7 @@
     // Defines the widget
     $.widget('ss.calculator', {
 
+        // widget currrent version
         version: '0.0.1',
 
         // configurable options
@@ -42,11 +43,15 @@
             this._createButtons();
             this._renderMarkup();
 
+            // triggers event when any button is clicked
             this._on({
                 'click button': this._clickHandler
             });
 
+            // array showing the result
             this.currentDisplay = [];
+
+            // array showing calculation
             this.display = [];
             this.numericalInput = false;
         },
@@ -54,10 +59,12 @@
         // Creates the wrapper
         _createWrapper: function() {
             var el = $('<div/>'), display;
+
             this.shell = el.clone().addClass('ss-calculator-shell ui-widget-header ui-corner-all');
             display = el.clone().addClass('ss-calculator-display ui-widget-content ui-corner-all').appendTo(this.shell);
             el.clone().addClass('ss-calculator-calculation').appendTo(display);
             el.clone().text('0').addClass('ss-calculator-result').appendTo(display);
+
             if(!this.options.showOnCreate) {
                 this._hide(this.element, this.options.hide)
             }
@@ -72,6 +79,7 @@
                 if(widget._trigger('beforeAddButtons', null, button)) {
                     var btn = el.clone().text(button.label).appendTo(container).button();
 
+                    // adds classname to buttons if defined
                     if(!!button.classname) {
                         btn.addClass(button.classname);
                     }
@@ -79,6 +87,8 @@
                     if(typeof button.action === 'string') {
                         btn.data('action', button.action);
                     }
+
+                    // for user defined function for a button
                     else if(typeof button.action === 'function') {
                         var fName = 'custom.ss.' + i; 
                         widget['_' + fName] = button.action;
@@ -91,11 +101,12 @@
             container.appendTo(this.shell);
         },
 
-        // Joins everything together
+        // joins everything together
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
         },
 
+        // takes care of configurable options
         _setOptions: function(options) {
             this._superApply(arguments);
         },
@@ -113,10 +124,12 @@
             }
         }, 
 
+        // for the show animation
         show: function() {
             this._show(this.element, this.options.show);
         },
 
+        // handles the event when a button is clicked
         _clickHandler: function(e) {
             var btn = $(e.target).closest('button'), fn = btn.data('action');
 
@@ -140,6 +153,7 @@
             this._calculate(true);
         }, 
 
+        // carries on operations when an operator is clicked
         _operator: function(e, ui) {
 
             if(!this.display.length && !this.currentDisplay.length) {
@@ -153,7 +167,9 @@
                 this.display.push([this.currentDisplay.join(''), ' ', ui.text(), ' '].join(''))
             }
             else if(!this.numericalInput) {
-                var length = this.display.length, str = this.display[length - 1].replace(/[\*\/\+\-]/, ui.text());
+                var length = this.display.length,
+                    // changes the trailing operator if any other operator is clicked
+                    str = this.display[length - 1].replace(/[\*\/\+\-]/, ui.text());
                 this.display.pop();
                 this.display.push(str);
             }
@@ -192,7 +208,9 @@
             }
         },
 
+        // updates the result area
         _updateDisplay: function(reset) {
+
             if(!this.currentDisplay.length) {
                 this.element.find('.ss-calculator-result').text('0');
             }
@@ -205,12 +223,15 @@
             }
         },
 
+        // updates the calculation area
         _display: function() {
             this.element.find('.ss-calculator-calculation').text(this.display.join(''));
             this.currentDisplay = [];
         },
 
+        // calculates the result
         _calculate: function(final) {
+
             var ops = {
                 '+': function(x, y) { return x + y; },
                 '-': function(x, y) { return x - y; },
@@ -218,6 +239,7 @@
                 '/': function(x, y) { return x / y; }
             };
 
+            // avoids javascript precedence rule for operators
             function seqCalc(str) {
                 var arr = str.split(' '), left = +arr[0], x, length = arr.length;
 
@@ -234,15 +256,19 @@
 
                 var display = this.element.find('.ss-calculator-calculation').text(), current = this.element.find('.ss-calculator-result').text();
 
+                // fills with the result
                 this.currentDisplay = [seqCalc([display, current].join(''))];
                 this._updateDisplay();
                 this.display = [];
                 this._display();
                 this.numericalInput = false;
+
             }
             else if(this.display.length > 1) {
 
-                var tmp = this.display.pop(), trimmed = tmp.replace(/\s[\+\-\/\*]\s/, '');
+                var tmp = this.display.pop(), 
+                    // removes the trailing spaces and operator
+                    trimmed = tmp.replace(/\s[\+\-\/\*]\s/, '');
 
                 this.display.push(trimmed);
                 this.currentDisplay.push(seqCalc(this.display.join('')));
