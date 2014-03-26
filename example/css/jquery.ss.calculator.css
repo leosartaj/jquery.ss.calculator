@@ -1,3 +1,5 @@
+/* custom css for jquery.ss.calculator.js 
+ * Mozilla Firefox compatible */
 
 .ss-calculator .ui-button-disabled {
     opacity: 1; 
@@ -39,6 +41,7 @@
 
 .ss-calculator {
     width:11.56em; padding:.2em; 
+    margin: 100px auto 0px auto;
 }
 
 .ss-calculator-shell {
