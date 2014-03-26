@@ -15,24 +15,30 @@
     padding: .4em 1.05em; 
 }
 
+.ui-button.ss-calculator-clearentry span {
+    padding: .4em .95em; 
+}
+
 .ui-button.ss-calculator-times span {
-    padding: .4em .91em; 
+    padding: .4em 1.5em; 
 }
 
 .ui-button.ss-calculator-plus span, .ui-button.ss-calculator-equals span {
-    padding: .4em .8em; 
+    padding: .4em .9em; 
 }
 
 .ui-button.ss-calculator-wide span {
-    padding: .4em 2.5em; 
+    padding: .3em 2.4em; 
+    padding-bottom: 0.5em;
 }
 
 .ui-button.ss-calculator-dot span {
     padding: .4em 1.1em; 
+    padding-left: 1.1em;
 }
 
 .ss-calculator {
-    width:12.3em; padding:.2em; 
+    width:11.56em; padding:.2em; 
 }
 
 .ss-calculator-shell {

@@ -3,7 +3,7 @@
     // Contains all the buttons
     var buttons = [
         { label: 'Clear', classname: 'ss-calculator-clear ss-calculator-clearfix', action: 'clear' },
-        { label: 'CE', action: 'clearEntry' },
+        { label: 'CE', classname: 'ss-calculator-clearentry', action: 'clearEntry' },
         { label: '*', classname: 'ss-calculator-multiply', action: 'operator' },
         { label: 7, classname: 'ss-calculator-clearfix', action: 'number' },
         { label: 8, action: 'number' },
