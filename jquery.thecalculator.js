@@ -66,7 +66,7 @@
             el.clone().text('0').addClass('ss-calculator-result').appendTo(display);
 
             if(!this.options.showOnCreate) {
-                this._hide(this.element, this.options.hide)
+                this._hide(this.element, this.options.hide);
             }
         },
 
@@ -116,8 +116,8 @@
 
             if(key === 'buttons') {
                 this.shell.find('button').remove();
-                this._createButtons;
-                this._renderMarkup;
+                this._createButtons();
+                this._renderMarkup();
             }
             else if(key === 'disable') {
                 this.shell.find('button').button('option', key, val);
@@ -164,7 +164,7 @@
             }
 
             if(!this.display.length || this.numericalInput) {
-                this.display.push([this.currentDisplay.join(''), ' ', ui.text(), ' '].join(''))
+                this.display.push([this.currentDisplay.join(''), ' ', ui.text(), ' '].join(''));
             }
             else if(!this.numericalInput) {
                 var length = this.display.length,
