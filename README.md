@@ -21,7 +21,7 @@ git clone https://github.com/leosartaj/jquery.ss.calculator.git
 <script src="(path)/(jquery-ui-button)"></script>
 <link rel=stylesheet href="(path)/(jquery-ui-css)">
 <!-- plugin file -->
-<script src="(path)/jquery.ss.calculator.js"></script>
+<script src="(path)/jquery.thecalculator.js"></script>
 <!-- custom css -->
 <link rel=stylesheet href="(path)/(your_custom_css)">
 <script>
