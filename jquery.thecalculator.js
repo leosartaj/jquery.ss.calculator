@@ -26,7 +26,7 @@
     $.widget('ss.calculator', {
 
         // widget currrent version
-        version: '0.0.1',
+        version: '0.0.2',
 
         // configurable options
         options: {

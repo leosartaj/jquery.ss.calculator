@@ -2,14 +2,9 @@
     "name": "thecalculator",
     "title": "The Calculator",
     "description": "Add a calculator to your webpage!",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "homepage": "https://github.com/leosartaj/jquery.ss.calculator",
     "author": {
-        "name": "Sartaj Singh",
-        "email": "singhsartaj94@gmail.com",
-        "url": "https://github.com/leosartaj"
-    },
-    "maintainers": {
         "name": "Sartaj Singh",
         "email": "singhsartaj94@gmail.com",
         "url": "https://github.com/leosartaj"
