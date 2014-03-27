@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title> Testing calculator</title>
+
+    <!-- dependency  -->
+    <link rel=stylesheet href='css/dep_css/jquery-ui.min.css'>
+    <link rel=stylesheet href='css/dep_css/normalize.css'>
+
+    <!-- custom css -->
+    <!-- for firefox  -->
+    <link rel=stylesheet href='css/jquery.thecalculator.firefox.css'>
+
+    <!-- dependencies  -->
+    <script src='js/dep_js/jquery-2.1.0.min.js'></script>
+    <script src='js/dep_js/jquery-ui-1.10.4.custom.min.js'></script>
+
+    <!-- plugin js file -->
+    <script src='../jquery.thecalculator.js'></script>
+
+</head>
+<body>
+
+    <div id='calc'></div>
+
+    <script>
+        $(document).ready(function () {
+                // initializing calculator
+                $('#calc').calculator().draggable();
+        });
+    </script>
+
+</body>
+</htmL>
