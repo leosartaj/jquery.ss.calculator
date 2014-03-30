@@ -1,18 +1,6 @@
 /* custom css for jquery.ss.calculator.js 
  * Chrome compatible */
 
-.ss-calculator .ui-button-disabled {
-    opacity: 1; 
-}
-
-.ss-calculator button {
-    float: left; 
-}
-
-.ss-calculator-clearfix {
-    clear: left; 
-}
-
 .ui-button.ss-calculator-clear span {
     padding: .4em 1em; 
 }
@@ -49,7 +37,7 @@
 }
 
 .ss-calculator-display {
-    padding:1.25em .2em .2em; margin-bottom:.2em; overflow:hidden; position:relative; 
+    padding:1.25em .2em .2em; margin-bottom:.2em;
 }
 
 .ss-calculator-calculation {

@@ -91,7 +91,7 @@
                     // for user defined function for a button
                     else if(typeof button.action === 'function') {
                         var fName = 'custom.ss.' + i; 
-                        widget['_' + fName] = button.action;
+                        widget['_' + fName];
                         btn.data('action', fName);
                     }
                 }
@@ -104,6 +104,7 @@
         // joins everything together
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
+            this._setStyle();
         },
 
         // takes care of configurable options
@@ -276,6 +277,12 @@
                 this.display.push(tmp);
                 this._updateDisplay(true);
             }
+        },
+
+        _setStyle: function() {
+            $('.ss-calculator button').css('float', 'left');
+            $('.ss-calculator-clearfix').css('clear', 'left');
+            $('.ss-calculator-display').css('position', 'relative').css('overflow', 'hidden');
         }
 
     });
