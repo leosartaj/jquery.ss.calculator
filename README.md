@@ -32,6 +32,40 @@ git clone https://github.com/leosartaj/jquery.ss.calculator.git
 </script>
 ```
 
+## Configurable Options
+
+### buttons
+
+Buttons is an array containing all the buttons. Each element is an object containing a label, action and classname property. Label defines the button label, while action can be from the predefined 'number', 'operator'( +, -, \*, \/), 'dot'(for decimal point), 'equals'(=),  'clear'(clears everything), 'clearEntry'(clears the present entry) or action can be a custom function.
+
+Here's an example
+
+```javascript
+
+    $('#calc').calculator({
+        buttons: [
+            { label: 'Clear', classname: 'ss-calculator-clear ss-calculator-clearfix', action: 'clear' },
+            { label: 'CE', classname: 'ss-calculator-clearentry', action: 'clearEntry' },
+            { label: '*', classname: 'ss-calculator-multiply', action: 'operator' },
+            { label: 7, classname: 'ss-calculator-clearfix', action: 'number' },
+            { label: 8, action: 'number' },
+            { label: 9, action: 'number' },
+            { label: '+', classname: 'ss-calculator-plus', action: 'operator' },
+            { label: 4, classname: 'ss-calculator-clearfix', action: 'number' },
+            { label: 5, action: 'number' },
+            { label: 6, action: 'number' },
+            { label: '-', classname: 'ss-calculator-minus', action: 'operator' },
+            { label: 1, classname: 'ss-calculator-clearfix', action: 'number' },
+            { label: 2, action: 'number' },
+            { label: 3, action: 'number' },
+            { label: '/', classname: 'ss-calculator-divide', action: 'operator' },
+            { label: 0, classname: 'ss-calculator-clearfix ss-calculator-wide', action: 'number' },
+            { label: '.', classname: 'ss-calculator-dot', action: 'dot' },
+            { label: '=', classname: 'ss-calculator-equals', action: 'equals' }
+    ]});
+
+```
+
 ## Examples
 
 An example file can be found in example/example.html

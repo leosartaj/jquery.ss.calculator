@@ -32,8 +32,7 @@
         options: {
             buttons: buttons,
             show: false,
-            hide: false,
-            showOnCreate: true
+            hide: false
         },
 
         // Calls at the time of creation
