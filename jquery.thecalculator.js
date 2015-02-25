@@ -191,6 +191,8 @@
 
             if(!x) {
                 this.currentDisplay.push('0');
+                this.currentDisplay.push('.');
+                return false;
             }
 
             while( --x) {
